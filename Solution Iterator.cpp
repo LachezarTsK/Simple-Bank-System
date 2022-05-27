@@ -21,8 +21,8 @@ public:
         if (!isValidAccount(fromAccount) || !isValidAccount(toAccount) || !accountHasResourcesForTransaction(fromAccount, money)) {
             return false;
         }
-        *(iterator_balance + fromAccount - 1) -= money;
-        *(iterator_balance + toAccount - 1) += money;
+        iterator_balance[fromAccount - 1] -= money;
+        iterator_balance[toAccount - 1] += money;
         return true;
     }
 
@@ -30,7 +30,7 @@ public:
         if (!isValidAccount(account)) {
             return false;
         }
-        *(iterator_balance + account - 1) += money;
+        iterator_balance[account - 1] += money;
         return true;
     }
 
@@ -38,7 +38,7 @@ public:
         if (!isValidAccount(account) || !accountHasResourcesForTransaction(account, money)) {
             return false;
         }
-        *(iterator_balance + account - 1) -= money;
+        iterator_balance[account - 1] -= money;
         return true;
     }
 
@@ -48,6 +48,6 @@ private:
     }
 
     bool accountHasResourcesForTransaction(int account, long money) {
-        return *(iterator_balance + account - 1) - money >= 0;
+        return iterator_balance[account - 1] - money >= 0;
     }
 };
